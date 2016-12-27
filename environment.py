@@ -32,4 +32,7 @@ env["FTRACK_CONNECT_NUKE_PLUGINS_PATH"] = [
     )
 ]
 
+# QT_PREFERRED_BINDING
+env["QT_PREFERRED_BINDING"] = ["PySide2", "PySide"]
+
 utils.write_environment(env)
