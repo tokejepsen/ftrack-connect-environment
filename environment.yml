@@ -1,0 +1,13 @@
+name: ftrack-connect-environment
+dependencies:
+- python=2.7
+- pip
+- pip:
+  - PySide
+- git:
+  - https://bitbucket.org/ftrack/ftrack-connect.git
+  - https://bitbucket.org/ftrack/ftrack-connect-maya.git
+  - https://bitbucket.org/ftrack/ftrack-connect-nuke.git
+  - https://github.com/tokejepsen/ftrack-connect-environment.git:
+    - python $REPO_PATH/environment.py
+    - python -m ftrack_connect
