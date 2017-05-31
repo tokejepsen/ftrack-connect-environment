@@ -4,10 +4,13 @@ dependencies:
 - pip
 - pip:
   - PySide
+  - arrow
+  - riffle
 - git:
   - https://bitbucket.org/ftrack/ftrack-connect.git
   - https://bitbucket.org/ftrack/ftrack-connect-maya.git
   - https://bitbucket.org/ftrack/ftrack-connect-nuke.git
+  - https://bitbucket.org/ftrack/ftrack-connect-rv.git
   - https://github.com/tokejepsen/ftrack-connect-environment.git:
     - python $REPO_PATH/environment.py
     - python -m ftrack_connect
