@@ -3,7 +3,6 @@ import logging
 import subprocess
 
 import ftrack
-import ftrack_connect_rv
 
 logging.basicConfig()
 logger = logging.getLogger()
@@ -30,20 +29,12 @@ def modify_application_launch(event):
         path = event["data"]["application"]["path"]
         rvpkg = os.path.join(os.path.dirname(path), "rvpkg.exe")
 
-        rvpkg_version = '.'.join(ftrack_connect_rv.__version__.split('.'))
-        plugin_file = 'ftrack-{0}.rvpkg'.format(rvpkg_version)
-        package = os.path.join(
-            os.path.join(
-                os.environ["CONDA_GIT_REPOSITORY"],
-                "ftrack-connect-environment"
-            ),
-            "environment",
-            "RV_SUPPORT_PATH",
-            "Packages",
-            plugin_file
-        )
-
-        subprocess.call([rvpkg, "-install", package])
+        # Check if ftrack plugin is available and installed
+        for line in subprocess.check_output([rvpkg, "-list"]).split("\n"):
+            if "\"ftrack\"" in line:
+                if not line.startswith("I"):
+                    # Install ftrack plugin
+                    subprocess.call([rvpkg, "-install", "ftrack"])
 
     return data
 
