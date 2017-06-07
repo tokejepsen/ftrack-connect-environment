@@ -62,6 +62,9 @@ env["FTRACK_CONNECT_PLUGIN_PATH"] = [
     os.path.join(os.environ["CONDA_GIT_REPOSITORY"], "ftrack-connect-maya"),
     os.path.join(os.environ["CONDA_GIT_REPOSITORY"], "ftrack-connect-nuke"),
     os.path.join(os.environ["CONDA_GIT_REPOSITORY"], "ftrack-connect-rv"),
+    os.path.join(
+        os.environ["CONDA_GIT_REPOSITORY"], "ftrack-connect-nuke-studio"
+    ),
     os.path.join(root, "environment", "FTRACK_CONNECT_PLUGIN_PATH"),
 ]
 
@@ -76,6 +79,15 @@ env["FTRACK_CONNECT_MAYA_PLUGINS_PATH"] = [
 env["FTRACK_CONNECT_NUKE_PLUGINS_PATH"] = [
     os.path.join(
         os.environ["CONDA_GIT_REPOSITORY"], "ftrack-connect-nuke", "resource"
+    )
+]
+
+# FTRACK_CONNECT_NUKE_STUDIO_PATH
+env["FTRACK_CONNECT_NUKE_STUDIO_PATH"] = [
+    os.path.join(
+        os.environ["CONDA_GIT_REPOSITORY"],
+        "ftrack-connect-nuke-studio",
+        "resource"
     )
 ]
 
