@@ -54,6 +54,10 @@ if ("CONDA_GIT_UPDATE" in os.environ and
    "repositories" in os.environ["CONDA_GIT_UPDATE"]):
     build_rv_plugin()
 
+# Build RV plugin if none exists
+if not os.path.exists(os.path.join(root, "environment", "RV_SUPPORT_PATH")):
+    build_rv_plugin()
+
 # PYTHONPATH
 env["PYTHONPATH"] = [os.path.join(root, "environment", "PYTHONPATH")]
 
