@@ -49,14 +49,21 @@ def build_rv_plugin():
     shutil.move(src, dst)
 
 
-# Build RV plugin if updating the repositories
-if ("CONDA_GIT_UPDATE" in os.environ and
-   "repositories" in os.environ["CONDA_GIT_UPDATE"]):
-    build_rv_plugin()
+# Check is ftrack_connect_rv is available for building plugin.
+if utils.check_module("ftrack_connect_rv"):
+    # Build RV plugin if updating the repositories
+    if ("CONDA_GIT_UPDATE" in os.environ and
+       "repositories" in os.environ["CONDA_GIT_UPDATE"]):
+        build_rv_plugin()
 
-# Build RV plugin if none exists
-if not os.path.exists(os.path.join(root, "environment", "RV_SUPPORT_PATH")):
-    build_rv_plugin()
+    # Build RV plugin if none exists
+    path = os.path.join(root, "environment", "RV_SUPPORT_PATH")
+    if not os.path.exists(path):
+        build_rv_plugin()
+else:
+    msg = "Could not build ftrack-connect-rv plugin because "
+    msg += "ftrack_connect_rv in not available."
+    print msg
 
 # PYTHONPATH
 env["PYTHONPATH"] = [os.path.join(root, "environment", "PYTHONPATH")]
