@@ -65,9 +65,6 @@ else:
     msg += "ftrack_connect_rv in not available."
     print msg
 
-# PYTHONPATH
-env["PYTHONPATH"] = [os.path.join(root, "environment", "PYTHONPATH")]
-
 # FTRACK_CONNECT_PLUGIN_PATH
 env["FTRACK_CONNECT_PLUGIN_PATH"] = [
     os.path.join(os.environ["CONDA_GIT_REPOSITORY"], "ftrack-connect-maya"),

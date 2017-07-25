@@ -54,6 +54,7 @@ def register(registry, **kw):
         modify_application_launch
     )
 
+
 if __name__ == "__main__":
     logger.setLevel(logging.DEBUG)
 
