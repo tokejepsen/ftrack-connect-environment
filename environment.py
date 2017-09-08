@@ -5,6 +5,8 @@ import sys
 
 from conda_git_deployment import utils
 
+import ftrack_connect
+
 
 root = os.path.dirname(__file__)
 env = {}
@@ -64,6 +66,27 @@ else:
     msg = "Could not build ftrack-connect-rv plugin because "
     msg += "ftrack_connect_rv in not available."
     print msg
+
+
+# Build ftrack-connect resources
+resources = os.path.join(
+    os.environ["CONDA_GIT_REPOSITORY"],
+    "ftrack-connect",
+    "source",
+    "ftrack_connect",
+    "ui",
+    "resource.py"
+)
+if not os.path.exists(resources):
+    subprocess.call(
+        [
+            "python",
+            os.path.join(
+                os.environ["CONDA_GIT_REPOSITORY"],"ftrack-connect", "setup.py"
+            ),
+            "build_resources"
+        ]
+    )
 
 # FTRACK_CONNECT_PLUGIN_PATH
 env["FTRACK_CONNECT_PLUGIN_PATH"] = [
