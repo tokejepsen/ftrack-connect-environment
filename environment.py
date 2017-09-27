@@ -5,8 +5,6 @@ import sys
 
 from conda_git_deployment import utils
 
-import ftrack_connect
-
 
 root = os.path.dirname(__file__)
 env = {}
@@ -82,7 +80,9 @@ if not os.path.exists(resources):
         [
             "python",
             os.path.join(
-                os.environ["CONDA_GIT_REPOSITORY"],"ftrack-connect", "setup.py"
+                os.environ["CONDA_GIT_REPOSITORY"],
+                "ftrack-connect",
+                "setup.py"
             ),
             "build_resources"
         ]
