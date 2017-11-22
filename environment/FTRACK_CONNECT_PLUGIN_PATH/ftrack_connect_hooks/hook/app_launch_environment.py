@@ -32,6 +32,9 @@ def modify_application_launch(event):
                 os.path.join(__file__, "..", "..", "invalidate_pyside")
             )
         )
+        # Do not autoload xgen, because when loaded we have to reload the
+        # plugin, which ask to delete the Xgen shelf.
+        data["command"].append("-noAutoloadPlugins")
 
     # Installing RV plugin
     # Currently Windows only
