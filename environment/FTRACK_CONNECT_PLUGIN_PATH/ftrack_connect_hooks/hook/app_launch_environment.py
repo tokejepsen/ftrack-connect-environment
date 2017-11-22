@@ -23,6 +23,16 @@ def modify_application_launch(event):
             site_packages + os.pathsep + data["options"]["env"]["PYTHONPATH"]
         )
 
+    # Invalidate PySide importing in 2017+ to ensure PySide2 is loaded in
+    # favour of PySide. This is done through a custom userSetup.py.
+    # Plugins like Xgen wrongly tries to import PySide before trying PySide2.
+    if int(event["data"]["application"]["version"]) > 2016:
+        data["options"]["env"]["PYTHONPATH"] += (
+            os.pathsep + os.path.abspath(
+                os.path.join(__file__, "..", "..", "invalidate_pyside")
+            )
+        )
+
     # Installing RV plugin
     # Currently Windows only
     if event["data"]["application"]["identifier"].startswith("rv"):
