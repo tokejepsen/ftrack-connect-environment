@@ -9,11 +9,20 @@ from conda_git_deployment import utils
 def _build_rv_plugin():
     root = os.path.dirname(__file__)
 
+    repository_path = os.path.abspath(
+        os.path.join(
+            sys.executable,
+            "..",
+            "Lib",
+            "site-packages",
+            "repositories",
+            "ftrack-connect-rv"
+        )
+    )
+
     subprocess.call(
         ["python", "setup.py", "build_plugin"],
-        cwd=os.path.join(
-            os.environ["CONDA_GIT_REPOSITORY"], "ftrack-connect-rv"
-        )
+        cwd=repository_path
     )
 
     # Clear existing plugin
@@ -22,20 +31,11 @@ def _build_rv_plugin():
         shutil.rmtree(path, ignore_errors=True)
 
     # Copy build plugin
-    sys.path.append(
-        os.path.join(
-            os.environ["CONDA_GIT_REPOSITORY"], "ftrack-connect-rv", "source"
-        )
-    )
+    sys.path.append(os.path.join(repository_path, "source"))
     import ftrack_connect_rv
     rvpkg_version = '.'.join(ftrack_connect_rv.__version__.split('.'))
     plugin_file = 'ftrack-{0}.rvpkg'.format(rvpkg_version)
-    src = os.path.join(
-        os.environ["CONDA_GIT_REPOSITORY"],
-        "ftrack-connect-rv",
-        "build",
-        plugin_file
-    )
+    src = os.path.join(repository_path, "build", plugin_file)
     dst = os.path.join(
         root, "environment", "RV_SUPPORT_PATH", "Packages", plugin_file
     )
