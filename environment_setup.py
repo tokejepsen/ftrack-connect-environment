@@ -52,14 +52,14 @@ def build_rv_plugin():
         # Build RV plugin if updating the repositories
         if ("CONDA_GIT_UPDATE" in os.environ and
            "repositories" in os.environ["CONDA_GIT_UPDATE"]):
-            build_rv_plugin()
+            _build_rv_plugin()
 
         # Build RV plugin if none exists
         path = os.path.join(
             os.path.dirname(__file__), "environment", "RV_SUPPORT_PATH"
         )
         if not os.path.exists(path):
-            build_rv_plugin()
+            _build_rv_plugin()
     else:
         msg = "Could not build ftrack-connect-rv plugin because "
         msg += "ftrack_connect_rv in not available."
