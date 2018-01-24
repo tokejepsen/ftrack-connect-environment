@@ -67,10 +67,20 @@ def build_rv_plugin():
 
 
 def build_ftrack_connect_resources():
+    repository_path = os.path.abspath(
+        os.path.join(
+            sys.executable,
+            "..",
+            "Lib",
+            "site-packages",
+            "repositories",
+            "ftrack-connect"
+        )
+    )
+
     # Build ftrack-connect resources
     resources = os.path.join(
-        os.environ["CONDA_GIT_REPOSITORY"],
-        "ftrack-connect",
+        repository_path,
         "source",
         "ftrack_connect",
         "ui",
@@ -81,8 +91,7 @@ def build_ftrack_connect_resources():
             [
                 "python",
                 os.path.join(
-                    os.environ["CONDA_GIT_REPOSITORY"],
-                    "ftrack-connect",
+                    repository_path,
                     "setup.py"
                 ),
                 "build_resources"
